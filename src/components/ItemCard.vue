@@ -19,16 +19,30 @@ export default {
         getFlagImage(percorsoBandiera) {
             return new URL(percorsoBandiera, import.meta.url).href;
         },
-        getVisibilitaStella(numStella) {
-            console.log("Visibilità stella " + numStella);
-            console.log("Voto film: " + this.vote);
+        getStarClass(numStella) {
+
+            let classeStella = "";
 
             if (numStella <= this.vote) {
-                return true;
+                classeStella = "fa-solid";
             } else {
-                return false;
+                classeStella = "fa-regular";
             }
+
+            classeStella += " fa-star";
+
+            return classeStella;
         }
+        // getVisibilitaStella(numStella) {
+        //     console.log("Visibilità stella " + numStella);
+        //     console.log("Voto film: " + this.vote);
+
+        //     if (numStella <= this.vote) {
+        //         return true;
+        //     } else {
+        //         return false;
+        //     }
+        // }
         // getTitle(item) {
         //     if (item.title) {
         //         return item.title;
@@ -74,7 +88,17 @@ export default {
 
         <!-- <span v-for="stella in stelle">X</span> -->
 
-        <span v-for="elemento in vote">X</span>
+        <div class="itemVoteStars">
+            <template v-for="n in 5">
+                <!-- <font-awesome-icon :icon="getStarClass(n)" /> -->
+
+                <!-- <i :class="(n <= vote) ? 'fa-solid fa-star' : 'fa-regular fa-star'"></i> -->
+                <font-awesome-icon :icon="(n <= vote) ? 'fa-solid fa-star' : 'fa-regular fa-star'" />
+
+                <!-- <font-awesome-icon v-if="(n <= vote)" icon="fa-solid fa-star" />
+                <font-awesome-icon v-else icon="fa-regular fa-star" /> -->
+            </template>
+        </div>
     </div>
 </template>
 
